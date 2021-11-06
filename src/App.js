@@ -5,7 +5,10 @@ import Card from './components/Card';
 class App extends React.Component {
   constructor() {
     super();
+
     this.onInputChange = this.onInputChange.bind(this);
+    this.buttonDisabled = this.buttonDisabled.bind(this);
+    this.atttrDisabled = this.atttrDisabled.bind(this);
 
     this.state = {
       cardName: '',
@@ -16,15 +19,44 @@ class App extends React.Component {
       cardImage: '',
       cardRare: '',
       cardTrunfo: false,
+      isDisabled: true,
     };
   }
 
   onInputChange({ target }) {
     const { name } = target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
-    this.setState({
-      [name]: value,
-    });
+    this.setState({ [name]: value }, this.buttonDisabled);
+  }
+
+  buttonDisabled() {
+    const { cardName, cardDescription, cardImage, cardRare } = this.state;
+    if (
+      cardName.length !== 0
+      && cardDescription !== ''
+      && cardImage !== ''
+      && cardRare !== ''
+      && this.atttrDisabled()) {
+      this.setState({ isDisabled: false });
+    } else {
+      this.setState({ isDisabled: true });
+    }
+  }
+
+  atttrDisabled() {
+    const { cardAttr1, cardAttr2, cardAttr3 } = this.state;
+
+    const valueAttr1 = Number(cardAttr1);
+    const valueAttr2 = Number(cardAttr2);
+    const valueAttr3 = Number(cardAttr3);
+    const attrsAll = valueAttr1 + valueAttr2 + valueAttr3;
+    const limitsAttrs = 210;
+    const limit = 90;
+
+    if (attrsAll > limitsAttrs) return false;
+    if (valueAttr1 > limit || valueAttr2 > limit || valueAttr3 > limit) return false;
+    if (valueAttr1 < 0 || valueAttr2 < 0 || valueAttr3 < 0) return false;
+    return true;
   }
 
   render() {
@@ -37,12 +69,16 @@ class App extends React.Component {
       cardImage,
       cardRare,
       cardTrunfo,
+      isDisabled,
     } = this.state;
 
     return (
       <div>
         <h1>Tryunfo</h1>
-        <Form onInputChange={ this.onInputChange } />
+        <Form
+          onInputChange={ this.onInputChange }
+          isSaveButtonDisabled={ isDisabled }
+        />
         <Card
           cardName={ cardName }
           cardDescription={ cardDescription }
