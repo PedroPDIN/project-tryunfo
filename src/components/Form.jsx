@@ -44,7 +44,6 @@ class Form extends Component {
                 data-testid="description-input"
                 value={ cardDescription }
                 onChange={ onInputChange }
-
               />
             </label>
           </div>
