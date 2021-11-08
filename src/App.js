@@ -12,6 +12,8 @@ class App extends React.Component {
     this.atttrDisabled = this.atttrDisabled.bind(this);
     this.saveCard = this.saveCard.bind(this);
     this.newCard = this.newCard.bind(this);
+    this.removeCard = this.removeCard.bind(this);
+    /* this.test = this.test.bind(this); */
 
     this.state = {
       cardName: '',
@@ -40,6 +42,19 @@ class App extends React.Component {
       cardSave: [...prevState.cardSave, valueCard],
     }));
   }
+
+  removeCard(cardName) {
+    const { cardSave } = this.state;
+    this.setState(() => ({
+      cardSave: cardSave.filter((element) => element.cardName !== cardName),
+    }));
+    this.setState({ hasTrunfo: false });
+  }
+
+  /*  test() {
+    const { cardSave, hasTrunfo } = this.state;
+
+  } */
 
   buttonDisabled() {
     const { cardName, cardDescription, cardImage, cardRare } = this.state;
@@ -150,7 +165,7 @@ class App extends React.Component {
           cardRare={ cardRare }
           cardTrunfo={ cardTrunfo }
         />
-        <CardList cardSave={ cardSave } />
+        <CardList cardSave={ cardSave } removeCard={ this.removeCard } />
       </div>
     );
   }

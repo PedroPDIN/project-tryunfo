@@ -3,21 +3,28 @@ import PropTypes from 'prop-types';
 
 class CardList extends Component {
   render() {
-    const { cardSave } = this.props;
+    const { cardSave, removeCard } = this.props;
 
     return (
       <div>
         <ul>
           {cardSave.map((element) => (
-            <li key={ cardSave }>
-              <h1>{element.cardName}</h1>
+            <li key={ element.cardName }>
+              <h1>{ element.cardName }</h1>
               <img src={ element.cardImage } alt={ element.carName } />
               <p>{ element.cardDescription }</p>
               <p>{ element.cardAttr1 }</p>
               <p>{ element.cardAttr2 }</p>
-              <p>{ element.cardAttr3 }</p>
+              <p>{element.cardAttr3 }</p>
               <p>{ element.cardRare }</p>
               <p>{ element.cardTrunfo }</p>
+              <button
+                data-testid="delete-button"
+                type="button"
+                onClick={ () => removeCard(element.cardName) }
+              >
+                Excluir
+              </button>
             </li>
           ))}
         </ul>
@@ -37,6 +44,7 @@ CardList.propTypes = {
     cardRare: PropTypes.string,
     cardTrunfo: PropTypes.bool,
   })).isRequired,
+  removeCard: PropTypes.func.isRequired,
 };
 
 export default CardList;
