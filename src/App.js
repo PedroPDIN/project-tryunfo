@@ -11,19 +11,19 @@ class App extends React.Component {
     this.atttrDisabled = this.atttrDisabled.bind(this);
     this.saveCard = this.saveCard.bind(this);
     this.newCard = this.newCard.bind(this);
-    this.hasTrunfo = this.hasTrunfo.bind(this);
 
     this.state = {
       cardName: '',
       cardDescription: '',
-      cardAttr1: 0,
-      cardAttr3: 0,
-      cardAttr2: 0,
+      cardAttr1: '',
+      cardAttr3: '',
+      cardAttr2: '',
       cardImage: '',
       cardRare: '',
       cardTrunfo: false,
       isDisabled: true,
       cardSave: [],
+      hasTrunfo: false,
     };
   }
 
@@ -70,11 +70,6 @@ class App extends React.Component {
     return true;
   }
 
-  hasTrunfo(value) {
-    const { cardTrunfo } = this.state;
-    return cardTrunfo ? 'Você já tem um Super Trunfo em seu baralho' : value;
-  }
-
   saveCard(event) {
     event.preventDefault();
     this.setState({
@@ -108,6 +103,8 @@ class App extends React.Component {
       cardRare,
       cardTrunfo,
     });
+
+    this.setState({ hasTrunfo: cardTrunfo });
   }
 
   render() {
@@ -121,6 +118,7 @@ class App extends React.Component {
       cardRare,
       cardTrunfo,
       isDisabled,
+      hasTrunfo,
     } = this.state;
 
     return (
@@ -138,7 +136,7 @@ class App extends React.Component {
           onInputChange={ this.onInputChange }
           isSaveButtonDisabled={ isDisabled }
           onSaveButtonClick={ this.saveCard }
-          hasTrunfo={ this.hasTrunfo }
+          hasTrunfo={ hasTrunfo }
         />
         <Card
           cardName={ cardName }
