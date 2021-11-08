@@ -51,11 +51,6 @@ class App extends React.Component {
     this.setState({ hasTrunfo: false });
   }
 
-  /*  test() {
-    const { cardSave, hasTrunfo } = this.state;
-
-  } */
-
   buttonDisabled() {
     const { cardName, cardDescription, cardImage, cardRare } = this.state;
     if (
