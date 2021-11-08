@@ -10,7 +10,7 @@ class App extends React.Component {
     this.buttonDisabled = this.buttonDisabled.bind(this);
     this.atttrDisabled = this.atttrDisabled.bind(this);
     this.saveCard = this.saveCard.bind(this);
-    /* this.test = this.test.bind(this); */
+    this.newCard = this.newCard.bind(this);
 
     this.state = {
       cardName: '',
@@ -22,7 +22,7 @@ class App extends React.Component {
       cardRare: '',
       cardTrunfo: false,
       isDisabled: true,
-      /* cardSave: [], */
+      cardSave: [],
     };
   }
 
@@ -31,6 +31,12 @@ class App extends React.Component {
     const value = target.type === 'checkbox' ? target.checked : target.value;
 
     this.setState({ [name]: value }, this.buttonDisabled, this.saveCard);
+  }
+
+  newCard(valueCard) {
+    this.setState((prevState) => ({
+      cardSave: [...prevState.cardSave, valueCard],
+    }));
   }
 
   buttonDisabled() {
@@ -64,7 +70,6 @@ class App extends React.Component {
   }
 
   saveCard(event) {
-    /* this.test(); */
     event.preventDefault();
     this.setState({
       cardName: '',
@@ -75,31 +80,29 @@ class App extends React.Component {
       cardImage: '',
       cardRare: 'normal',
     });
+
+    const {
+      cardName,
+      cardDescription,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+      cardImage,
+      cardRare,
+      cardTrunfo,
+    } = this.state;
+
+    this.newCard({
+      cardName,
+      cardDescription,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+      cardImage,
+      cardRare,
+      cardTrunfo,
+    });
   }
-
-  /*   test() {
-      const {
-        cardName,
-        cardDescription,
-        cardAttr1,
-        cardAttr2,
-        cardAttr3,
-        cardImage,
-        cardRare
-      } = this.state;
-
-      this.setState({
-        cardSave: [
-          { cardName },
-          { cardDescription },
-          { cardAttr1 },
-          { cardAttr2 },
-          { cardAttr3 },
-          { cardImage },
-          { cardRare },
-        ]
-      });
-    } */
 
   render() {
     const {
@@ -118,27 +121,27 @@ class App extends React.Component {
       <div>
         <h1>Tryunfo</h1>
         <Form
-          cardName={ cardName }
-          cardDescription={ cardDescription }
-          cardAttr1={ cardAttr1 }
-          cardAttr2={ cardAttr2 }
-          cardAttr3={ cardAttr3 }
-          cardImage={ cardImage }
-          cardRare={ cardRare }
-          cardTrunfo={ cardTrunfo }
-          onInputChange={ this.onInputChange }
-          isSaveButtonDisabled={ isDisabled }
-          onSaveButtonClick={ this.saveCard }
+          cardName={cardName}
+          cardDescription={cardDescription}
+          cardAttr1={cardAttr1}
+          cardAttr2={cardAttr2}
+          cardAttr3={cardAttr3}
+          cardImage={cardImage}
+          cardRare={cardRare}
+          cardTrunfo={cardTrunfo}
+          onInputChange={this.onInputChange}
+          isSaveButtonDisabled={isDisabled}
+          onSaveButtonClick={this.saveCard}
         />
         <Card
-          cardName={ cardName }
-          cardDescription={ cardDescription }
-          cardAttr1={ cardAttr1 }
-          cardAttr2={ cardAttr2 }
-          cardAttr3={ cardAttr3 }
-          cardImage={ cardImage }
-          cardRare={ cardRare }
-          cardTrunfo={ cardTrunfo }
+          cardName={cardName}
+          cardDescription={cardDescription}
+          cardAttr1={cardAttr1}
+          cardAttr2={cardAttr2}
+          cardAttr3={cardAttr3}
+          cardImage={cardImage}
+          cardRare={cardRare}
+          cardTrunfo={cardTrunfo}
         />
       </div>
     );
