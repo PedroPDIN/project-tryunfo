@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 
 class CardList extends Component {
   render() {
-    const { cardSave, removeCard } = this.props;
+    const { filterElement, removeCard } = this.props;
 
     return (
       <div>
         <ul>
-          {cardSave.map((element) => (
+          {filterElement.map((element) => (
             <li key={ element.cardName }>
               <h1>{ element.cardName }</h1>
               <img src={ element.cardImage } alt={ element.carName } />
@@ -34,7 +34,7 @@ class CardList extends Component {
 }
 
 CardList.propTypes = {
-  cardSave: PropTypes.arrayOf(PropTypes.shape({
+  filterElement: PropTypes.arrayOf(PropTypes.shape({
     cardName: PropTypes.string,
     cardImage: PropTypes.string,
     cardDescription: PropTypes,

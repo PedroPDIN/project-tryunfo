@@ -2,6 +2,7 @@ import React from 'react';
 import Form from './components/Form';
 import Card from './components/Card';
 import CardList from './components/CardList';
+import InputFilter from './components/InputFilter';
 
 class App extends React.Component {
   constructor() {
@@ -13,7 +14,7 @@ class App extends React.Component {
     this.saveCard = this.saveCard.bind(this);
     this.newCard = this.newCard.bind(this);
     this.removeCard = this.removeCard.bind(this);
-    /* this.test = this.test.bind(this); */
+    this.filterElement = this.filterElement.bind(this);
 
     this.state = {
       cardName: '',
@@ -27,6 +28,7 @@ class App extends React.Component {
       isDisabled: true,
       cardSave: [],
       hasTrunfo: false,
+      inputFilter: '',
     };
   }
 
@@ -49,6 +51,11 @@ class App extends React.Component {
       cardSave: cardSave.filter((element) => element.cardName !== cardName),
     }));
     this.setState({ hasTrunfo: false });
+  }
+
+  filterElement() {
+    const { cardSave, inputFilter } = this.state;
+    return cardSave.filter((value) => value.cardName.includes(inputFilter));
   }
 
   buttonDisabled() {
@@ -119,6 +126,7 @@ class App extends React.Component {
   }
 
   render() {
+    const filterElement = this.filterElement();
     const {
       cardName,
       cardDescription,
@@ -130,7 +138,7 @@ class App extends React.Component {
       cardTrunfo,
       isDisabled,
       hasTrunfo,
-      cardSave,
+      inputFilter,
     } = this.state;
 
     return (
@@ -150,6 +158,7 @@ class App extends React.Component {
           onSaveButtonClick={ this.saveCard }
           hasTrunfo={ hasTrunfo }
         />
+
         <Card
           cardName={ cardName }
           cardDescription={ cardDescription }
@@ -160,7 +169,14 @@ class App extends React.Component {
           cardRare={ cardRare }
           cardTrunfo={ cardTrunfo }
         />
-        <CardList cardSave={ cardSave } removeCard={ this.removeCard } />
+
+        <InputFilter
+          inputFilter={ inputFilter }
+          onInputChange={ this.onInputChange }
+        />
+
+        <CardList filterElement={ filterElement } removeCard={ this.removeCard } />
+
       </div>
     );
   }
