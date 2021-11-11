@@ -10,14 +10,14 @@ class CardList extends Component {
         <ul>
           {filterElement.map((element) => (
             <li key={ element.cardName }>
-              <h1>{ element.cardName }</h1>
+              <h1>{element.cardName}</h1>
               <img src={ element.cardImage } alt={ element.carName } />
-              <p>{ element.cardDescription }</p>
-              <p>{ element.cardAttr1 }</p>
-              <p>{ element.cardAttr2 }</p>
-              <p>{element.cardAttr3 }</p>
-              <p>{ element.cardRare }</p>
-              <p>{ element.cardTrunfo }</p>
+              <p>{element.cardDescription}</p>
+              <p>{element.cardAttr1}</p>
+              <p>{element.cardAttr2}</p>
+              <p>{element.cardAttr3}</p>
+              <p>{element.cardRare}</p>
+              <p>{element.cardTrunfo}</p>
               <button
                 data-testid="delete-button"
                 type="button"
@@ -38,9 +38,9 @@ CardList.propTypes = {
     cardName: PropTypes.string,
     cardImage: PropTypes.string,
     cardDescription: PropTypes,
-    cardAttr1: PropTypes.number,
-    cardAttr2: PropTypes.number,
-    cardAttr3: PropTypes.number,
+    cardAttr1: PropTypes.string,
+    cardAttr2: PropTypes.string,
+    cardAttr3: PropTypes.string,
     cardRare: PropTypes.string,
     cardTrunfo: PropTypes.bool,
   })).isRequired,

@@ -15,20 +15,26 @@ class App extends React.Component {
     this.newCard = this.newCard.bind(this);
     this.removeCard = this.removeCard.bind(this);
     this.filterElement = this.filterElement.bind(this);
-
+    this.onInputFilter = this.onInputFilter.bind(this);
+    /* this.disabledInput = this.disabledInput.bind(this);
+ */
     this.state = {
       cardName: '',
       cardDescription: '',
-      cardAttr1: '',
-      cardAttr3: '',
-      cardAttr2: '',
+      cardAttr1: '0',
+      cardAttr3: '0',
+      cardAttr2: '0',
       cardImage: '',
-      cardRare: '',
+      cardRare: 'normal',
       cardTrunfo: false,
       isDisabled: true,
       cardSave: [],
       hasTrunfo: false,
-      inputFilter: '',
+      filter: {
+        nameFilter: '',
+        rareFilter: 'todas',
+        trunfoFilter: false,
+      },
     };
   }
 
@@ -37,6 +43,19 @@ class App extends React.Component {
     const value = target.type === 'checkbox' ? target.checked : target.value;
 
     this.setState({ [name]: value }, this.buttonDisabled, this.saveCard);
+  }
+
+  onInputFilter({ target }) {
+    const { filter } = this.state;
+    const { name } = target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+
+    this.setState({
+      filter: {
+        ...filter,
+        [name]: value,
+      },
+    }, this.buttonDisabled, this.saveCard);
   }
 
   newCard(valueCard) {
@@ -49,14 +68,30 @@ class App extends React.Component {
     const { cardSave } = this.state;
     this.setState(() => ({
       cardSave: cardSave.filter((element) => element.cardName !== cardName),
+      hasTrunfo: false,
+      cardTrunfo: false,
     }));
-    this.setState({ hasTrunfo: false });
   }
 
   filterElement() {
-    const { cardSave, inputFilter } = this.state;
-    return cardSave.filter((value) => value.cardName.includes(inputFilter));
+    const { cardSave, filter: {
+      nameFilter, rareFilter, trunfoFilter,
+    } } = this.state;
+    return cardSave
+      .filter((value) => (nameFilter === ''
+        ? cardSave : value.cardName.includes(nameFilter)))
+      .filter((value) => (rareFilter === 'todas'
+        ? cardSave : value.cardRare === rareFilter))
+      .filter((value) => (trunfoFilter === value.cardTrunfo
+        ? cardSave : !trunfoFilter));
   }
+
+  /* disabledInput() {
+    this.setState((prevState) => ({
+      filter: { disabled: prevState.trunfoFilter },
+    }));
+  }
+ */
 
   buttonDisabled() {
     const { cardName, cardDescription, cardImage, cardRare } = this.state;
@@ -90,16 +125,6 @@ class App extends React.Component {
 
   saveCard(event) {
     event.preventDefault();
-    this.setState({
-      cardName: '',
-      cardDescription: '',
-      cardAttr1: 0,
-      cardAttr2: 0,
-      cardAttr3: 0,
-      cardImage: '',
-      cardRare: 'normal',
-    });
-
     const {
       cardName,
       cardDescription,
@@ -122,7 +147,18 @@ class App extends React.Component {
       cardTrunfo,
     });
 
-    this.setState({ hasTrunfo: cardTrunfo });
+    this.setState((prevState) => ({
+      cardName: '',
+      cardDescription: '',
+      cardAttr1: '0',
+      cardAttr2: '0',
+      cardAttr3: '0',
+      cardImage: '',
+      cardRare: 'normal',
+      cardTrunfo: false,
+      hasTrunfo: prevState.cardTrunfo === false
+        ? prevState.hasTrunfo : prevState.cardTrunfo,
+    }));
   }
 
   render() {
@@ -138,7 +174,7 @@ class App extends React.Component {
       cardTrunfo,
       isDisabled,
       hasTrunfo,
-      inputFilter,
+      filter: { nameFilter, rareFilter, trunfoFilter },
     } = this.state;
 
     return (
@@ -171,8 +207,10 @@ class App extends React.Component {
         />
 
         <InputFilter
-          inputFilter={ inputFilter }
-          onInputChange={ this.onInputChange }
+          inputFilter={ nameFilter }
+          rareFilter={ rareFilter }
+          trunfoFilter={ trunfoFilter }
+          onInputFilter={ this.onInputFilter }
         />
 
         <CardList filterElement={ filterElement } removeCard={ this.removeCard } />
