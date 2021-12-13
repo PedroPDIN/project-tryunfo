@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import '../css/Form.css';
 
 class Form extends Component {
   render() {
@@ -20,12 +21,13 @@ class Form extends Component {
 
     return (
       <div>
-        <form>
+        <form className="form">
           <div>
-            <label htmlFor="name-input">
+            <label htmlFor="name-input" className="label-form">
               Nome:
               <input
                 type="text"
+                className="input-form"
                 name="cardName"
                 id="name-input"
                 data-testid="name-input"
@@ -36,23 +38,11 @@ class Form extends Component {
           </div>
 
           <div>
-            <label htmlFor="description-input">
-              Descrição da Carta:
-              <textarea
-                name="cardDescription"
-                id="description-input"
-                data-testid="description-input"
-                value={ cardDescription }
-                onChange={ onInputChange }
-              />
-            </label>
-          </div>
-
-          <div>
-            <label htmlFor="attr1-input">
+            <label htmlFor="attr1-input" className="label-form">
               Primeiro Atributo:
               <input
                 name="cardAttr1"
+                className="input-form"
                 type="number"
                 data-testid="attr1-input"
                 value={ cardAttr1 }
@@ -62,10 +52,11 @@ class Form extends Component {
           </div>
 
           <div>
-            <label htmlFor="attr2-input">
+            <label htmlFor="attr2-input" className="label-form">
               Segundo Atributo:
               <input
                 name="cardAttr2"
+                className="input-form"
                 type="number"
                 data-testid="attr2-input"
                 value={ cardAttr2 }
@@ -75,10 +66,11 @@ class Form extends Component {
           </div>
 
           <div>
-            <label htmlFor="attr3-input">
+            <label htmlFor="attr3-input" className="label-form">
               Terceiro Atributo:
               <input
                 name="cardAttr3"
+                className="input-form"
                 type="number"
                 data-testid="attr3-input"
                 value={ cardAttr3 }
@@ -88,10 +80,11 @@ class Form extends Component {
           </div>
 
           <div>
-            <label htmlFor="image-input">
+            <label htmlFor="image-input" className="label-form">
               Imagem da carta:
               <input
                 name="cardImage"
+                className="input-form"
                 type="text"
                 data-testid="image-input"
                 value={ cardImage }
@@ -100,10 +93,27 @@ class Form extends Component {
             </label>
           </div>
 
-          <label htmlFor="rare-input">
+          <div>
+            <label htmlFor="description-input" className="label-form">
+              Descrição da Carta:
+              <textarea
+                name="cardDescription"
+                rows="5"
+                cols="33"
+                className="textarea-form"
+                id="description-input"
+                data-testid="description-input"
+                value={ cardDescription }
+                onChange={ onInputChange }
+              />
+            </label>
+          </div>
+
+          <label htmlFor="rare-input" className="label-form">
             Raridade da carta:
             <select
               name="cardRare"
+              className="select-form"
               id="rare-input"
               data-testid="rare-input"
               value={ cardRare }
@@ -120,7 +130,7 @@ class Form extends Component {
             {hasTrunfo
               ? (<span>Você já tem um Super Trunfo em seu baralho</span>)
               : (
-                <label htmlFor="trunfo-input">
+                <label htmlFor="trunfo-input" className="label-form">
                   <input
                     name="cardTrunfo"
                     type="checkbox"
@@ -136,6 +146,7 @@ class Form extends Component {
           <br />
           <button
             data-testid="save-button"
+            className="bottom-form"
             type="submit"
             disabled={ isSaveButtonDisabled }
             onClick={ onSaveButtonClick }
