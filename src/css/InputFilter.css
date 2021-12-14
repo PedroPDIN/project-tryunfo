@@ -1,6 +1,6 @@
 .conteiner-filter {
   align-items: flex-start;
-  border-top: solid black 5px;
+  border-top: solid #035332 10px;
   display: flex;
   flex-direction: column;
   margin-left: 20px;
@@ -11,10 +11,11 @@
 
 .input-filter {
   background: white;
-  border: 1px solid #3d495c;
+  border: 2px solid #035332;
   border-radius: 6px;
   display: flex;
   flex-direction: column;
+  font-size: 17px;
   margin-bottom: 10px;
   margin-left: -10px;
   padding: 12px 16px;
@@ -22,10 +23,11 @@
 
 .selected-filter {
   background: white;
-  border: 1px solid #3d495c;
+  border: 2px solid #035332;
   border-radius: 6px;
   display: flex;
   flex-direction: column;
+  font-size: 17px;
   margin-bottom: 10px;
   margin-left: -10px;
   padding: 12px 16px;
@@ -34,7 +36,7 @@
 .checked-filter {
   color: #3d495c;
   font-family: sans-serif;
-  font-size: 16px;
+  font-size: 17px;
   font-style: normal;
   font-weight: 700;
   line-height: 150%;
