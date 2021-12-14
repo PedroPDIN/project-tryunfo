@@ -1,23 +1,27 @@
 // requisito 11 e 12 feito com ajuda de Ricardo Carvalho turma 16 for(ever).
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import '../css/InputFilter.css';
 
 class InputFilter extends Component {
   render() {
     const { inputFilter, rareFilter, trunfoFilter, onInputFilter } = this.props;
 
     return (
-      <div>
+      <div className="conteiner-filter">
         <input
           data-testid="name-filter"
+          className="input-filter"
           type="text"
           name="nameFilter"
+          placeholder="Nome da Carta"
           id="search"
           value={ inputFilter }
           onChange={ onInputFilter }
         />
 
         <select
+          className="selected-filter"
           data-testid="rare-filter"
           name="rareFilter"
           id="select"
@@ -31,14 +35,15 @@ class InputFilter extends Component {
         </select>
 
         <label htmlFor="trunfo-filter">
-          Super Trunfo
           <input
+            className="checked-filter"
             type="checkbox"
             data-testid="trunfo-filter"
             name="trunfoFilter"
             checked={ trunfoFilter }
             onChange={ onInputFilter }
           />
+          Super Trunfo
         </label>
       </div>
     );

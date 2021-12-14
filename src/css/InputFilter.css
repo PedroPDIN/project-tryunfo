@@ -1,0 +1,42 @@
+.conteiner-filter {
+  align-items: flex-start;
+  border-top: solid black 5px;
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 20px;
+  padding: 10px;
+}
+
+.input-filter {
+  background: white;
+  border: 1px solid #3d495c;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+  margin-left: -10px;
+  padding: 12px 16px;
+}
+
+.selected-filter {
+  background: white;
+  border: 1px solid #3d495c;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+  margin-left: -10px;
+  padding: 12px 16px;
+}
+
+.checked-filter {
+  color: #3d495c;
+  font-family: sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 150%;
+  margin-left: -10px;
+}
