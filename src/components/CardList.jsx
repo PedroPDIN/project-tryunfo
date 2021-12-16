@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import '../css/CardList.css';
 
 class CardList extends Component {
   render() {
@@ -7,21 +8,31 @@ class CardList extends Component {
 
     return (
       <div>
-        <ul>
+        <ul className="ul-cardList">
           {filterElement.map((element) => (
-            <li key={ element.cardName }>
-              <h1>{element.cardName}</h1>
-              <img src={ element.cardImage } alt={ element.carName } />
-              <p>{element.cardDescription}</p>
-              <p>{element.cardAttr1}</p>
-              <p>{element.cardAttr2}</p>
-              <p>{element.cardAttr3}</p>
-              <p>{element.cardRare}</p>
-              <p>{element.cardTrunfo}</p>
+            <li key={ element.cardName } className="li-cardList">
+              <h1 className="h1-cardList">{element.cardName}</h1>
+              <img
+                src={ element.cardImage }
+                alt={ element.carName }
+                className="img-cardList"
+              />
+              <p className="description-cardList">{element.cardDescription}</p>
+
+              <div className="conteiner-attr-cardList">
+                <p>{element.cardAttr1}</p>
+                <p>{element.cardAttr2}</p>
+                <p>{element.cardAttr3}</p>
+              </div>
+
+              <p className="rare-cardList">{element.cardRare}</p>
+              <p className="trunfo-cardList">{element.cardTrunfo}</p>
+
               <button
                 data-testid="delete-button"
                 type="button"
                 onClick={ () => removeCard(element.cardName) }
+                className="button-cardList"
               >
                 Excluir
               </button>
